@@ -11,11 +11,12 @@ var buttonGenerator = function() {
 buttonGenerator();
 
 var newButton = function(buttonName) {
-    var button = $("<button>").attr("class","animalBtn btn btn-dark border-white").attr("status", "new").text(buttonName + " ");
+    var button = $("<button>").attr("class","animalBtn btn btn-dark border-white").attr("status", "new").css("display", "none").text(buttonName + " ");
     var badge = $("<span>").addClass("badge badge-light").text("New");
     $(button).attr("data-animal",buttonName);
     $(button).append(badge);
     $(".buttons").append(button);
+    $(button).slideDown();
     
 }
 $("#animalSubmit").on("click", function() {
@@ -28,11 +29,13 @@ $("#animalSubmit").on("click", function() {
 
 $(document.body).on('click', '.animalBtn' ,function(){
     $(".images").empty();
+    $(".animalBtn").removeClass("disabled");
+    $(this).addClass("disabled");
     var status = $(this).attr("status");
     if (status === "new") {
         $(this).attr("status", "old");
         var span = $(this).children()
-        $(span).remove();
+        $(span).slideToggle();
     }
     var animal = $(this).data("animal");
     $.ajax({
@@ -47,6 +50,7 @@ $(document.body).on('click', '.animalBtn' ,function(){
             $(figure).append(figCaption);
             $(".images").append(figure);
         }
+
     })
 })
 $(document.body).on('click', '.animalImage' ,function(){
@@ -62,4 +66,5 @@ $(document.body).on('click', '.animalImage' ,function(){
         $(this).attr("state", "animate")
     }
 })
+
 

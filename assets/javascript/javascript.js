@@ -6,31 +6,42 @@ var buttonGenerator = function() {
         var button = $("<button>").attr("class","animalBtn btn btn-dark border-white").text(element);
         $(button).attr("data-animal",element);
         $(".buttons").append(button);
-        
     })
 }
 buttonGenerator();
 
+var newButton = function(buttonName) {
+    var button = $("<button>").attr("class","animalBtn btn btn-dark border-white").attr("status", "new").text(buttonName + " ");
+    var badge = $("<span>").addClass("badge badge-light").text("New");
+    $(button).attr("data-animal",buttonName);
+    $(button).append(badge);
+    $(".buttons").append(button);
+    
+}
 $("#animalSubmit").on("click", function() {
     event.preventDefault();
     var animalValue = $("#animalEntry").val().trim();
     animals.push(animalValue);
     $("#animalEntry").val("");
-    buttonGenerator();
+    newButton(animalValue);
 })
 
 $(document.body).on('click', '.animalBtn' ,function(){
     $(".images").empty();
+    var status = $(this).attr("status");
+    if (status === "new") {
+        $(this).attr("status", "old");
+        var span = $(this).children()
+        $(span).remove();
+    }
     var animal = $(this).data("animal");
-    console.log(animal);
     $.ajax({
         url: "http://api.giphy.com/v1/gifs/search?api_key=Rze1PjMB7bfIJp8mFpv83b1MG03cf3y5&q=" + animal + "&limit=10",
         method: "GET"
     }).then(function(response) {
-        console.log(response);
         for (i=0; i < response.data.length; i++) {
-            var figure = $("<figure>").addClass("figure border border-dark rounded bg-light");
-            var image = $("<img>").attr("src", response.data[i].images.downsized.url).attr("state", "animate").attr("stillUrl", response.data[i].images.downsized_still.url).attr("animateUrl", response.data[i].images.downsized.url).addClass("animalImage img-fluid");
+            var figure = $("<figure>").addClass("figure border border-dark rounded bg-light text-center p-1");
+            var image = $("<img>").attr("src", response.data[i].images.downsized.url).attr("state", "animate").attr("stillUrl", response.data[i].images.downsized_still.url).attr("animateUrl", response.data[i].images.downsized.url).addClass("animalImage img-fluid rounded");
             var figCaption = $("<figcaption>").addClass("figure-caption").text(response.data[i].title)
             $(figure).append(image); 
             $(figure).append(figCaption);

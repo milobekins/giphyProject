@@ -1,0 +1,22 @@
+h1 {
+    font-weight: bold;
+    text-shadow: darkblue 1px 1px;
+    color: white;
+    text-align: center;
+}
+body {
+    background-image: url("../images/background3.jpg");
+    color: white;
+}
+.animalBtn {
+    margin: 2px;
+}
+figure {
+    margin: 2px;
+}
+form {
+    margin: 2px;
+    border: white 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+}

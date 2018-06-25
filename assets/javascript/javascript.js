@@ -16,7 +16,7 @@ var newButton = function(buttonName) {
     $(button).attr("data-animal",buttonName);
     $(button).append(badge);
     $(".buttons").append(button);
-    $(button).slideDown();
+    $(button).slideDown(200);
     
 }
 $("#animalSubmit").on("click", function() {
@@ -35,7 +35,7 @@ $(document.body).on('click', '.animalBtn' ,function(){
     if (status === "new") {
         $(this).attr("status", "old");
         var span = $(this).children()
-        $(span).slideToggle();
+        $(span).slideToggle(100);
     }
     var animal = $(this).data("animal");
     $.ajax({

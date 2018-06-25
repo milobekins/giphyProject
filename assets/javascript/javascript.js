@@ -22,9 +22,11 @@ var newButton = function(buttonName) {
 $("#animalSubmit").on("click", function() {
     event.preventDefault();
     var animalValue = $("#animalEntry").val().trim();
-    animals.push(animalValue);
-    $("#animalEntry").val("");
-    newButton(animalValue);
+    if (animalValue === "") {}
+    else {animals.push(animalValue);
+        $("#animalEntry").val("");
+        newButton(animalValue);
+    }
 })
 
 $(document.body).on('click', '.animalBtn' ,function(){
@@ -70,11 +72,4 @@ $(document.body).on('click', '.animalImage' ,function(){
     }
 })
 
-/* $(".head").slideToggle();
-setTimeout(function() {
-    $(".buttons").slideToggle();
-    setTimeout(function() {
-        $(".animalEntry").slideToggle();
-    },500)
-},500) */
 

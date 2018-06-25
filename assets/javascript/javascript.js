@@ -29,6 +29,7 @@ $("#animalSubmit").on("click", function() {
 
 $(document.body).on('click', '.animalBtn' ,function(){
     $(".images").empty();
+    $(".images").css("display", "none");
     $(".animalBtn").removeClass("disabled");
     $(this).addClass("disabled");
     var status = $(this).attr("status");
@@ -50,7 +51,9 @@ $(document.body).on('click', '.animalBtn' ,function(){
             $(figure).append(figCaption);
             $(".images").append(figure);
         }
-
+        setTimeout(function() {
+            $(".images").slideDown("slow");
+        },100)
     })
 })
 $(document.body).on('click', '.animalImage' ,function(){
@@ -67,4 +70,11 @@ $(document.body).on('click', '.animalImage' ,function(){
     }
 })
 
+/* $(".head").slideToggle();
+setTimeout(function() {
+    $(".buttons").slideToggle();
+    setTimeout(function() {
+        $(".animalEntry").slideToggle();
+    },500)
+},500) */
 
